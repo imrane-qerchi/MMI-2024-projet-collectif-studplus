@@ -1,4 +1,4 @@
-# MMI-projet-collectif-2024-projet-co-studplus
+# MMI-projet-collectif-2024-projet-co-studplus test
 
 - GROUPE : N°24
 - URL de la landig page : https://studplus.imrane-qerchi.fr/
