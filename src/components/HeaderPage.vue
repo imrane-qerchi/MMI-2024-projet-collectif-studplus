@@ -12,7 +12,9 @@ function closeMenu() {
 }
 </script>
 <template>
-  <header class="flex items-center justify-between px-10 py-12 gap-8 border-b-2 border-b-indigo-100 h-24">
+  <header
+    class="flex items-center justify-between px-10 py-12 gap-8 border-b-2 border-b-indigo-100 h-24"
+  >
     <RouterLink to="/" @click="closeMenu">
       <IconLogo />
     </RouterLink>
