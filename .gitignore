@@ -33,5 +33,7 @@ coverage
 typed-router.d.ts
 
 # PocketBase
-/pocketbase/*
+!/pocketbase/
+!/pocketbase/pb_data
 !/pocketbase/pb_migrations
+
