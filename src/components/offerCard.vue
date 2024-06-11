@@ -50,10 +50,10 @@ function fixeFavoriPourID(fav: boolean, id: string) {
     >
       <div class="flex  items-start self-stretch flex-grow-0 flex-shrink-0 relative">
         <div
-          class="max-w-full flex flex-col  items-start flex-grow-0 flex-shrink-0 h-full relative"
+          class="max-w-full flex flex-col gap-3 items-start flex-grow-0 flex-shrink-0 h-full relative"
         >
           <div
-            class="flex flex-col  items-start flex-grow-0 flex-shrink-0 h-[54px] relative"
+            class="flex flex-col items-start flex-grow-0 flex-shrink-0 h-[54px] relative"
           >
             <p class="self-stretch flex-grow-0 flex-shrink-0 text-[22px] font-semibold text-left text-black">
               {{ nom }}
