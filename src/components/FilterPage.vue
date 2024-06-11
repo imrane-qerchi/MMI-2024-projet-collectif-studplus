@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full max-w-full mx-0 bg-[rgb(238_242_255)]">
+  <div class="relative w-full max-w-full mx-0 bg-[rgb(238_242_255)] z-0">
     <div
       ref="carousel"
       class="flex justify-start space-x-4 py-5 overflow-hidden hide-scrollbar cursor-grab active:cursor-grabbing"
@@ -16,8 +16,9 @@
         class="rounded bg-[#e3e3e3] shadow-lg focus:outline-none hover:bg-gray-200"
         :text="button"
         variant="filter"
-        :url="buttonPaths[index]"
-        :icon="$route.path === buttonPaths[index] ? IconRemove : null"
+        url="/"
+        :icon="active[index] ? IconRemove : null"
+        @click="toggleActive(index)"
       />
     </div>
   </div>
@@ -29,9 +30,21 @@ import Button from '@/components/Button.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 
 const buttons = ['Restauration', 'Beauté', 'Cinéma', 'Coiffeur', 'Loisirs']
-const buttonPaths = ['/restauration', '/beaute', '/cinema', '/coiffeur', '/loisirs']
 const carousel = ref<HTMLElement | null>(null)
+const active = ref(buttons.map(() => false))
+const emit = defineEmits(['filterChange'])
 
+const toggleActive = (index: number) => {
+  if (active.value[index]) {
+    // Si le bouton est déjà actif, le désactiver
+    active.value[index] = false;
+  } else {
+    // Sinon, désactiver tous les boutons et activer celui sur lequel on a cliqué
+    active.value = active.value.map(() => false);
+    active.value[index] = true;
+  }
+  emit('filterChange', { filter: buttons[index], active: active.value[index] });
+}
 const isDown = ref(false)
 const startX = ref(0)
 const scrollLeft = ref(0)

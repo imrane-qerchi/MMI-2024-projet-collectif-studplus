@@ -17,7 +17,7 @@ function fixeFavoriPourID(fav: boolean, id: string) {
 <template>
   
 
-<div class="flex flex-col justify-between items-start w-full h-full">
+<div class="flex flex-col justify-between items-start w-full h-full z-10">
     <div class="flex flex-col justify-between items-start self-stretch flex-grow relative">
       <ImgPb :record="props" :filename="image"
         class="max-h-[200px] self-stretch flex-grow rounded-tl-[15px] rounded-tr-[15px] object-cover border-4 bg-white border-white"
