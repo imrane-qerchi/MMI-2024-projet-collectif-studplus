@@ -81,6 +81,18 @@ export async function getFullListFilteredNomCard() {
   }
 }
 
+export async function getFullListFilteredBeaute() {
+  try {
+    const records = await pb.collection('Card').getFullList({ filter: 'type="Beaute"' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+getFullListFilteredBeaute
+
 export async function getFullListFilteredCertified() {
   try {
     const records = await pb.collection('card').getFullList({ filter: 'certified=true' })
