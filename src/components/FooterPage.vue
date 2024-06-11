@@ -12,9 +12,10 @@ import IconMMI from '@/components/icons/IconMMI.vue'
   <footer class="flex flex-col w-full overflow-hidden pb-20 bg-[#E3E3E3]">
     <div class="flex justify-between items-center py-24 relative px-8 md:px-52">
       <iconLogo />
-      <IconMMI class="w-[6vw] h-auto" />
+      <IconMMI class="w-[70px] lg:w-[6vw] h-auto" />
     </div>
     <nav class="flex flex-wrap gap-11 w-full justify-between items-start px-8 md:px-52">
+      <p class="text-4xl font-bold">#SAVESTUDENTS</p>
       <div class="flex flex-col justify-between gap-10 relative w-full md:w-auto">
         <p class="w-full text-xl font-medium uppercase border-b-2 border-#694C9B">
           Besoin d'aide ?
