@@ -91,7 +91,55 @@ export async function getFullListFilteredBeaute() {
   }
 }
 
-getFullListFilteredBeaute
+export async function getFullListFilteredLoisirs() {
+  try {
+    const records = await pb.collection('Card').getFullList({ filter: 'type="Loisirs"' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export async function getFullListFilteredMode() {
+  try {
+    const records = await pb.collection('Card').getFullList({ filter: 'type="Mode"' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export async function getFullListFilteredRestauration() {
+  try {
+    const records = await pb.collection('Card').getFullList({ filter: 'type="Restauration"' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export async function getFullListFilteredSport() {
+  try {
+    const records = await pb.collection('Card').getFullList({ filter: 'type="Sport"' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export async function getFullListFilteredTechnologie() {
+  try {
+    const records = await pb.collection('Card').getFullList({ filter: 'type="Technologie"' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 export async function getFullListFilteredCertified() {
   try {
@@ -124,12 +172,10 @@ export async function getFullListFilteredNotNomCardAndSorted() {
   }
 }
 
-
 // export async function oneID(id) {
 //   const record = await pb.collection('Card').getOne(id)
 //   return record
 // }
-
 
 export async function allCardsSorted() {
   const records = await pb.collection('Card').getFullList({
