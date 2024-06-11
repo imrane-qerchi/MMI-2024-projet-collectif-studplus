@@ -15,14 +15,15 @@
       @touchstart="startTouch"
       @touchmove="moveTouch"
     >
-      <RouterLink
+      <Button
         v-for="(button, index) in buttons"
         :key="index"
-        :to="buttonPaths[index]"
-        class="p-1 rounded bg-[#e3e3e3] shadow-lg focus:outline-none hover:bg-gray-200"
-      >
-        <span class="font-bold">{{ button }}</span></RouterLink
-      >
+        class="rounded bg-[#e3e3e3] shadow-lg focus:outline-none hover:bg-gray-200"
+        :text="button"
+        variant="filter"
+        :url="buttonPaths[index]"
+        :icon="$route.path === buttonPaths[index] ? IconRemove : null"
+      />
     </div>
     <!-- <button 
       @click="scrollCarousel(200)" 
@@ -34,6 +35,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Button from '@/components/Button.vue'
+import IconRemove from '@/components/icons/IconRemove.vue'
 
 const buttons = ['Tout', 'Restauration', 'Beauté', 'Cinéma', 'Coiffeur', 'Loisirs']
 const buttonPaths = ['/', '/restauration', '/beaute', '/cinema', '/coiffeur', '/loisirs']
@@ -43,6 +46,7 @@ const isDown = ref(false)
 const startX = ref(0)
 const scrollLeft = ref(0)
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const scrollCarousel = (distance: number) => {
   if (carousel.value) {
     carousel.value.scrollBy({

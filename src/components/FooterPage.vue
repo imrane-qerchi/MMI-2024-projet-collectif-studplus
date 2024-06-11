@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import IconLogo from '@/components/icons/IconLogo.vue'
 import IconFacebook from '@/components/icons/IconFacebook.vue'
