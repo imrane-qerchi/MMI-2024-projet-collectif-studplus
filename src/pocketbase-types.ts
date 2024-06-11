@@ -52,7 +52,8 @@ export type UsersRecord = {
 }
 
 // Response types include system fields and match responses from the PocketBase API
-export type CardResponse<Texpand = unknown> = Required<CardRecord> & BaseSystemFields<Texpand>
+export type CardResponse<Texpand = { [key: string]: any } | undefined> = Required<CardRecord> &
+  BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions

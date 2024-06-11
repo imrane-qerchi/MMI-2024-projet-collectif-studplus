@@ -26,7 +26,7 @@ function closeMenu() {
       <span :class="{ '-translate-y-[5px] -rotate-45': activeMenu }"></span>
     </button>
     <nav
-      class="invisible opacity-0 flex-1 px-6 py-12 flex justify-between mt-24 flex-col fixed z-10 inset-0 bg-indigo-50 lg:mt-0 lg:flex-row lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
+      class="invisible opacity-0 flex-1 px-6 py-12 flex justify-between mt-24 flex-col fixed z-50 inset-0 bg-indigo-50 lg:mt-0 lg:flex-row lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
       :class="{ '!visible !opacity-100': activeMenu }"
       v-scroll-lock="activeMenu"
     >
