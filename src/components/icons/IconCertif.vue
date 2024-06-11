@@ -5,7 +5,7 @@
     viewBox="0 0 167 177"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class="absolute top-[15vh] right-[-10vh] w-[50vh] h-[50vh] overflow-hidden z-0"
+    class="absolute scale-75 top-[-5vh] lg:scale-100 lg:top-[5vh] right-[-10vh] w-[50vh] h-[50vh] overflow-hidden z-0"
     preserveAspectRatio="none"
   >
     <g opacity="0.35" clip-path="url(#clip0_143_283)">

@@ -8,7 +8,7 @@ const cardCertified = await getFullListFilteredCertified()
 </script>
 
 <template>
-  <div class="bg-[rgb(238_242_255)]">
+  <div class="relative overflow-x-hidden bg-[rgb(238_242_255)]">
 
     <IconCertif/>
 
