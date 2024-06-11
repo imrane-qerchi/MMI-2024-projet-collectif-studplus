@@ -1,12 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import offerCard from '@/components/offerCard.vue'
-import { getFullListFilteredCertified } from '@/backend'
+import { getFullListFilteredBeaute } from '@/backend'
 import { getFullListFilteredWithoutCertified } from '@/backend'
-import IconCertif from '@/components/icons/IconCertif.vue'
 import FilterPage from '@/components/FilterPage.vue'
 
-const cardCertified = await getFullListFilteredCertified()
+const cardBeaute = await getFullListFilteredBeaute()
 const cardWithoutCertified = await getFullListFilteredWithoutCertified()
 </script>
 
@@ -18,11 +17,11 @@ const cardWithoutCertified = await getFullListFilteredWithoutCertified()
     <div class="container pt-10 pb-32 space-y-20">
       <div class="flex flex-col gap-10">
         <div class="relative flex justify-between items-center w-full">
-          <h1 class="text-[34px] border-b-2 pb-3 border-[#694C9B]">Découvrez nos partenaires</h1>
+          <h1 class="text-[34px] border-b-2 pb-3 border-[#694C9B]">Découvrez nos offres Beauté</h1>
         </div>
 
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-          <offerCard v-for="card in cardCertified" v-bind="card" v-bind:key="card.id" />
+          <offerCard v-for="card in cardBeaute" v-bind="card" v-bind:key="card.id" />
         </div>
       </div>
 
@@ -35,7 +34,6 @@ const cardWithoutCertified = await getFullListFilteredWithoutCertified()
           <offerCard v-for="card in cardWithoutCertified" v-bind="card" v-bind:key="card.id" />
         </div>
       </div>
-
     </div>
   </div>
 </template>

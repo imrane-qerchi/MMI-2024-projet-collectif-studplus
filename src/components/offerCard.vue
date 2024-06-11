@@ -68,7 +68,7 @@ function fixeFavoriPourID(fav: boolean, id: string) {
               </p>
             </div>
           </div>
-          <p class="flex-grow-0 flex-shrink-0 text-[34px] font-semibold text-left text-[#694c9b]">
+          <p class="flex-grow-0 flex-shrink-0 text-3xl font-semibold text-left text-[#694c9b]">
             {{ description }}
           </p>
         </div>
