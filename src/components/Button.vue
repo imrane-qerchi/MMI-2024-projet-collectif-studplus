@@ -12,7 +12,7 @@ const props = withDefaults(
 )
 
 const variantClass = {
-  default: 'rounded-full bg-teal-[##694C9B] text-white',
+  default: 'rounded-full bg-[#694C9B] text-white',
   outlined: 'rounded-full border-2 border-black bg-transparent text-black',
   filter: 'p-1 rounded-lg bg-[#e3e3e3] shadow-lg focus:outline-none hover:bg-gray-200'
 }
@@ -26,7 +26,7 @@ const sizeClass = {
 
 <template>
   <RouterLink
-    class="flex justify-center items-center relative gap-2.5 text-base font-bold text-center"
+    class="whitespace-nowrap flex justify-center items-center relative gap-2.5 text-base font-bold text-center"
     :class="[variantClass[props.variant], sizeClass[props.size]]"
     :to="`${url}`"
   >
