@@ -1,0 +1,10 @@
+<template>
+  <RouterLink to="/">
+    <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M6.5 0C3.2 0 0.5 2.7 0.5 6C0.5 9.3 3.2 12 6.5 12C9.8 12 12.5 9.3 12.5 6C12.5 2.7 9.8 0 6.5 0ZM9.125 7.575L8.075 8.625L6.5 7.05L4.925 8.625L3.875 7.575L5.45 6L3.875 4.425L4.925 3.375L6.5 4.95L8.075 3.375L9.125 4.425L7.55 6L9.125 7.575Z"
+        fill="#6979F8"
+      />
+    </svg>
+  </RouterLink>
+</template>

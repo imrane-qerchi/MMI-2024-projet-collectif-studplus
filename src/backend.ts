@@ -91,6 +91,16 @@ export async function getFullListFilteredCertified() {
   }
 }
 
+export async function getFullListFilteredWithoutCertified() {
+  try {
+    const records = await pb.collection('card').getFullList({ filter: 'certified=false' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export async function getFullListFilteredNotNomCardAndSorted() {
   try {
     const records = await pb
