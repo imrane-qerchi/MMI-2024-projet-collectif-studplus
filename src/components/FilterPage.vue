@@ -29,7 +29,7 @@ import { ref } from 'vue'
 import Button from '@/components/Button.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 
-const buttons = ['Restauration', 'Beauté', 'Cinéma', 'Coiffeur', 'Loisirs']
+const buttons = ['Restauration', 'Beauté', 'Loisirs', 'Sport & Bien-être', 'Technologie', 'Mode']
 const carousel = ref<HTMLElement | null>(null)
 const active = ref(buttons.map(() => false))
 const emit = defineEmits(['filterChange'])
@@ -37,13 +37,13 @@ const emit = defineEmits(['filterChange'])
 const toggleActive = (index: number) => {
   if (active.value[index]) {
     // Si le bouton est déjà actif, le désactiver
-    active.value[index] = false;
+    active.value[index] = false
   } else {
     // Sinon, désactiver tous les boutons et activer celui sur lequel on a cliqué
-    active.value = active.value.map(() => false);
-    active.value[index] = true;
+    active.value = active.value.map(() => false)
+    active.value[index] = true
   }
-  emit('filterChange', { filter: buttons[index], active: active.value[index] });
+  emit('filterChange', { filter: buttons[index], active: active.value[index] })
 }
 const isDown = ref(false)
 const startX = ref(0)
