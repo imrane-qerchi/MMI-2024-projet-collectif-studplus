@@ -11,7 +11,7 @@ import IconHeart from '@/components/icons/IconHeart.vue'
 import IconPin from '@/components/icons/IconPin.vue'
 import { ref } from 'vue'
 
-const route = useRoute('/favoris/[id]')
+const route = useRoute('/[id]')
 const infoCard: CardResponse<any> = await pb.collection('Card').getOne(route.params.id)
 const imageHero = await pb.getFileUrl(infoCard, infoCard.image)
 
