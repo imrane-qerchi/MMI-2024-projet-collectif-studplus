@@ -16,7 +16,7 @@ import IconMMI from '@/components/icons/IconMMI.vue'
     <nav class="flex flex-wrap gap-11 w-full justify-between items-start px-8 md:px-52">
       <p class="text-4xl font-bold">#SAVESTUDENTS</p>
       <div class="flex flex-col justify-between gap-10 relative w-full md:w-auto">
-        <p class="w-full text-xl font-medium uppercase border-b-2 border-#694C9B">
+        <p class="w-full text-xl font-medium uppercase border-b-2 border-[#694C9B]">
           Besoin d'aide ?
         </p>
         <ul class="flex gap-4 flex-col justify-between relative">
@@ -35,7 +35,7 @@ import IconMMI from '@/components/icons/IconMMI.vue'
         </ul>
       </div>
       <div class="flex flex-col justify-between gap-10 relative w-full md:w-auto">
-        <p class="w-full text-xl font-medium uppercase border-b-2 border-#694C9B">Légal</p>
+        <p class="w-full text-xl font-medium uppercase border-b-2 border-[#694C9B]">Légal</p>
         <ul class="flex gap-4 flex-col justify-between relative">
           <li>
             <RouterLink class="block" to="/contact">Mentions légales</RouterLink>
@@ -49,7 +49,7 @@ import IconMMI from '@/components/icons/IconMMI.vue'
         </ul>
       </div>
       <div class="flex flex-col justify-between gap-10 relative w-full md:w-auto">
-        <p class="w-full text-xl font-medium uppercase">réseaux</p>
+        <p class="w-full text-xl font-medium uppercase border-b-2 border-[#694C9B]">réseaux</p>
         <div class="flex flex-col justify-between gap-6 w-60 relative">
           <p class="block">Suivez nous pour suivre notre actualité, nos promos et bien plus !</p>
           <div class="flex justify-between w-full relative">

@@ -161,6 +161,16 @@ export async function getFullListFilteredWithoutCertified() {
   }
 }
 
+export async function getFullListFilteredLiked() {
+  try {
+    const records = await pb.collection('card').getFullList({ filter: 'fav=true' })
+    console.table(records)
+    return records
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export async function getFullListFilteredNotNomCardAndSorted() {
   try {
     const records = await pb
