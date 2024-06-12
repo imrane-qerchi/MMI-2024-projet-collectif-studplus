@@ -9,7 +9,7 @@ import IconCertif2 from '@/components/icons/IconCertif2.vue'
 import IconClock from '@/components/icons/IconClock.vue'
 import IconHeart from '@/components/icons/IconHeart.vue'
 import IconPin from '@/components/icons/IconPin.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const route = useRoute('/favoris/[id]')
 const infoCard: CardResponse<any> = await pb.collection('Card').getOne(route.params.id)
@@ -27,6 +27,37 @@ function fixeFavoriPourID(fav: boolean, id: string) {
   pb.collection('Card').update(id, { fav: fav })
   location.reload()
 }
+
+
+import { GoogleMap, Marker } from "vue3-google-map";
+import { Loader } from '@googlemaps/js-api-loader';
+
+const API_KEY = "AIzaSyCKmO2ekMm4OlsHvib9gUlBAs9sEZSCv8Q";
+const center = ref({ lat: 47.5098, lng: 6.7997 });
+
+const ville = infoCard.ville; 
+const adresse = infoCard.adresse; 
+
+onMounted(async () => {
+  const loader = new Loader({
+    apiKey: API_KEY,
+    version: 'weekly',
+  });
+
+  await loader.load();
+
+  const geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({ address: `${adresse}, ${ville}` }, (results, status) => {
+    if (status === 'OK') {
+      center.value = results[0].geometry.location;
+    } else {
+      console.error('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+});
+
+
 </script>
 
 <template>
@@ -105,6 +136,14 @@ function fixeFavoriPourID(fav: boolean, id: string) {
 
   <div class="flex flex-col gap-10 px-5 py-16">
     <h1 class="max-w-fit text-[34px] border-b-2 pb-3 border-[#694C9B]">Viiite, j'en profite</h1>
+    <GoogleMap
+      :api-key="API_KEY"
+      style="width: 100%; height: 500px"
+      :center="center"
+      :zoom="14"
+    >
+      <Marker :options="{ position: center }" />
+    </GoogleMap>
   </div>
 
   <div class="flex flex-col px-5 py-16 gap-10 mb-36 bg-[#E3E3E3]">
