@@ -17,10 +17,10 @@ function fixeFavoriPourID(fav: boolean, id: string) {
 <template>
   
 
-<div class="flex flex-col justify-between items-start w-full h-fit z-10">
-    <div class="flex flex-col justify-between items-start self-stretch flex-grow relative">
+<div class="flex flex-col justify-between items-start w-full h-full z-10">
+    <div class="flex flex-col justify-between items-start self-stretch flex-grow relative ">
       <ImgPb :record="props" :filename="image"
-        class="max-h-[200px] self-stretch flex-grow rounded-tl-[15px] rounded-tr-[15px] object-cover border-4 bg-white border-white"
+        class="h-[200px] w-full  self-stretch flex-grow rounded-tl-[15px] rounded-tr-[15px] object-cover border-4 bg-white border-white"
       /><svg
         v-if="certified"
         width="24"
@@ -46,24 +46,24 @@ function fixeFavoriPourID(fav: boolean, id: string) {
       </svg>
     </div>
     <div
-      class="flex h-full w-full flex-col px-[27px] pt-[17px] pb-[23px] justify-start items-start self-stretch flex-grow-0 flex-shrink-0  rounded-bl-lg rounded-br-lg bg-white"
+      class="relative flex flex-col p-7 justify-start items-start self-stretch flex-grow-0 flex-shrink-0 rounded-bl-lg rounded-br-lg bg-white"
     >
-      <div class="flex  items-start self-stretch flex-grow-0 flex-shrink-0 relative">
+      <div class="flex  items-start self-stretch flex-grow-0 flex-shrink-0">
         <div
-          class="max-w-full flex flex-col gap-3 items-start flex-grow-0 flex-shrink-0 h-full relative"
+          class="max-w-full flex flex-col gap-3 items-start flex-grow-0 flex-shrink-0 h-full"
         >
           <div
-            class="flex flex-col items-start flex-grow-0 flex-shrink-0 h-[54px] relative"
+            class="flex flex-col items-start flex-grow-0 flex-shrink-0"
           >
-            <p class="self-stretch flex-grow-0 flex-shrink-0 text-[22px] font-semibold text-left text-black">
+            <p class="self-stretch text-[22px] font-semibold text-left text-black">
               {{ nom }}
             </p>
             <div class="flex flex-row items-center gap-2">
-              <p class="flex-grow-0 flex-shrink-0 text-[15px] font-semibold text-left text-[#858585]">
+              <p class="text-[15px] font-semibold text-left text-[#858585]">
                 {{ type }}
               </p>
               |
-              <p class="flex-grow-0 flex-shrink-0 text-[15px] font-semibold text-left text-[#858585]">
+              <p class="text-[15px] font-semibold text-left text-[#858585]">
                 {{ ville }}
               </p>
             </div>
@@ -79,7 +79,7 @@ function fixeFavoriPourID(fav: boolean, id: string) {
           viewBox="0 0 46 46"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="absolute right-0 flex-grow-0 flex-shrink-0 w-[46px] h-[46px]"
+          class="absolute right-7 flex-grow-0 flex-shrink-0 w-[46px] h-[46px]"
           preserveAspectRatio="none"
         >
           <circle
