@@ -44,12 +44,12 @@ function closeMenu() {
           >
         </li>
         <li>
-          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/buy" @click="closeMenu"
+          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/contact" @click="closeMenu"
             >Contact</RouterLink
           >
         </li>
         <li>
-          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/sell" @click="closeMenu"
+          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/account" @click="closeMenu"
             >Mon Compte</RouterLink
           >
         </li>
@@ -59,7 +59,7 @@ function closeMenu() {
           >
         </li>
         <li>
-          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/resources" @click="closeMenu"
+          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/about" @click="closeMenu"
             >À Propos</RouterLink
           >
         </li>
