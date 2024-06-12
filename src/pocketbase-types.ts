@@ -40,6 +40,7 @@ export type CardRecord = {
 	date?: IsoDateString
 	description?: string
 	detail?: string
+	dimanche?: string
 	fav?: boolean
 	image?: string
 	jeudi?: string
