@@ -127,24 +127,28 @@ function fixeFavoriPourID(fav: boolean, id: string) {
               <p>{{ infoCard.lundi }}</p>
             </li>
             <li class="flex justify-between">
-              <p>lundi</p>
+              <p>mardi</p>
               <p>{{ infoCard.mardi }}</p>
             </li>
             <li class="flex justify-between">
-              <p>lundi</p>
+              <p>mercredi</p>
               <p>{{ infoCard.mercredi }}</p>
             </li>
             <li class="flex justify-between">
-              <p>lundi</p>
+              <p>jeudi</p>
               <p>{{ infoCard.jeudi }}</p>
             </li>
             <li class="flex justify-between">
-              <p>lundi</p>
+              <p>vendredi</p>
               <p>{{ infoCard.vendredi }}</p>
             </li>
             <li class="flex justify-between">
-              <p>lundi</p>
+              <p>samedi</p>
               <p>{{ infoCard.samedi }}</p>
+            </li>
+            <li class="flex justify-between">
+              <p>dimanche</p>
+              <p>{{ infoCard.dimanche }}</p>
             </li>
           </ul>
         </div>
