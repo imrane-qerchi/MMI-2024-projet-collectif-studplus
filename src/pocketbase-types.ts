@@ -39,15 +39,25 @@ export type CardRecord = {
 	certified?: boolean
 	date?: IsoDateString
 	description?: string
+	detail?: string
 	fav?: boolean
 	image?: string
+	jeudi?: string
+	lundi?: string
+	mardi?: string
+	mercredi?: string
+	newPrice?: string
 	nom?: string
+	oldPrice?: string
+	samedi?: string
 	type?: string
+	vendredi?: string
 	ville?: string
 }
 
 export type UsersRecord = {
 	avatar?: string
+	favoris?: RecordIdString[]
 	name?: string
 }
 
