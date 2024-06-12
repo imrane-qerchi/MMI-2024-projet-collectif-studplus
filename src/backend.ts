@@ -197,3 +197,4 @@ export async function allCardsSorted() {
 export async function addNewEvent() {
   await pb.collection('event').create
 }
+

@@ -1,12 +1,15 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import offerCard from '@/components/offerCard.vue'
 import { getFullListFilteredLiked } from '@/backend'
+import IconLikeillus from '@/components/icons/IconLikeillus.vue';
 
 const cardLiked = await getFullListFilteredLiked()
 </script>
 
 <template>
   <div class="relative overflow-x-hidden bg-[rgb(238_242_255)]">
+    <IconLikeillus />
     <div class="container pt-10 pb-32 space-y-20">
       <div class="flex flex-col gap-10">
         <div class="relative flex justify-between items-center w-full">
