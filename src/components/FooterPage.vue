@@ -30,7 +30,7 @@ import IconMMI from '@/components/icons/IconMMI.vue'
             <RouterLink class="block" to="/about">À propos</RouterLink>
           </li>
           <li>
-            <RouterLink class="block" to="/about">Mon compte</RouterLink>
+            <RouterLink class="block" to="/account">Mon compte</RouterLink>
           </li>
         </ul>
       </div>
@@ -38,13 +38,13 @@ import IconMMI from '@/components/icons/IconMMI.vue'
         <p class="w-full text-xl font-medium uppercase border-b-2 border-[#694C9B]">Légal</p>
         <ul class="flex gap-4 flex-col justify-between relative">
           <li>
-            <RouterLink class="block" to="/contact">Mentions légales</RouterLink>
+            <RouterLink class="block" to="/LegalNotice">Mentions légales</RouterLink>
           </li>
           <li>
-            <RouterLink class="block" to="/about">Conditions d'utilisation</RouterLink>
+            <RouterLink class="block" to="/TermsOfUse">Conditions d'utilisation</RouterLink>
           </li>
           <li>
-            <RouterLink class="block" to="/about">Politique de confidentialité</RouterLink>
+            <RouterLink class="block" to="/PrivacyPolicy">Politique de confidentialité</RouterLink>
           </li>
         </ul>
       </div>
