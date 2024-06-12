@@ -10,7 +10,11 @@ const activeMenu = ref(false)
 function closeMenu() {
   activeMenu.value = false
 }
+
 </script>
+
+
+
 <template>
   <header
     class="flex items-center justify-between px-10 py-12 gap-8 border-b-2 border-b-indigo-100 h-24"
@@ -50,7 +54,7 @@ function closeMenu() {
           >
         </li>
         <li>
-          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/manage" @click="closeMenu"
+          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/favoris" @click="closeMenu"
             >Mes Favoris</RouterLink
           >
         </li>

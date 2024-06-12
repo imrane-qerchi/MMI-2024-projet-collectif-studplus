@@ -15,7 +15,7 @@ onErrorCaptured((err, instance, info) => {
   <HeaderPage />
   <RouterView v-slot="{ Component }">
     <Suspense>
-      <component :is="Component" />
+      <component :is="Component" :key="$route.path" />
     </Suspense>
   </RouterView>
   <FooterPage/>
