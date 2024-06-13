@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import IconLogo from '@/components/icons/IconLogo.vue'
 import { RouterLink } from 'vue-router'
-// import Button from './Button.vue';
-// import IconPlus from '@/components/icons/IconPlus.vue'
+import { pb } from '@/backend'
+import { useRouter } from 'vue-router/auto'
+import { ref } from 'vue'
 
 const activeMenu = ref(false)
+
+const router = useRouter()
+
+const doLogout = () => {
+  pb.authStore.clear()
+  router.push('/connexion')
+}
 
 function closeMenu() {
   activeMenu.value = false
 }
-
 </script>
-
-
 
 <template>
   <header
@@ -29,17 +33,14 @@ function closeMenu() {
       <span :class="{ 'translate-y-[5px] rotate-45': activeMenu }"></span>
       <span :class="{ '-translate-y-[5px] -rotate-45': activeMenu }"></span>
     </button>
-    <nav
+    <nav 
       class="invisible opacity-0 flex-1 px-6 py-12 flex justify-between mt-24 flex-col fixed z-50 inset-0 bg-indigo-50 lg:mt-0 lg:flex-row lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
       :class="{ '!visible !opacity-100': activeMenu }"
       v-scroll-lock="activeMenu"
     >
       <ul class="lg:ml-auto flex flex-col gap-4 lg:flex-row">
-        <li>
-          <RouterLink
-            class="block p-4 rounded-lg text-gray-500"
-            to="/nearOffers"
-            @click="closeMenu"
+        <li v-if="$route.path !== '/connexion' && $route.path !== '/inscription'"  >
+          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/nearOffers" @click="closeMenu"
             >Autour De Moi</RouterLink
           >
         </li>
@@ -48,12 +49,12 @@ function closeMenu() {
             >Contact</RouterLink
           >
         </li>
-        <li>
+        <li v-if="$route.path !== '/connexion' && $route.path !== '/inscription'"  >
           <RouterLink class="block p-4 rounded-lg text-gray-500" to="/account" @click="closeMenu"
             >Mon Compte</RouterLink
           >
         </li>
-        <li>
+        <li v-if="$route.path !== '/connexion' && $route.path !== '/inscription'"  >
           <RouterLink class="block p-4 rounded-lg text-gray-500" to="/favoris" @click="closeMenu"
             >Mes Favoris</RouterLink
           >
@@ -64,6 +65,13 @@ function closeMenu() {
           >
         </li>
       </ul>
+      <div class="flex flex-col items-center justify-center gap-4 px-4">
+        <button v-if="$route.path !== '/connexion' && $route.path !== '/inscription'"  
+          type="button"
+          @click="doLogout"
+          class="flex w-full justify-center rounded-md bg-[#694C9B] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >Déconnexion</button>
+      </div>
     </nav>
   </header>
 </template>

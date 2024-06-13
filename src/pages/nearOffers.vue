@@ -46,7 +46,7 @@ import { pb } from '@/backend'
 import type { CardResponse } from '@/pocketbase-types'
 import IconLoc from '@/components/icons/IconLoc.vue'
 
-// Importer l'icône utilisateur
+
 import userIcon from '@/components/icons/user.svg'
 
 const API_KEY = 'AIzaSyCKmO2ekMm4OlsHvib9gUlBAs9sEZSCv8Q'
