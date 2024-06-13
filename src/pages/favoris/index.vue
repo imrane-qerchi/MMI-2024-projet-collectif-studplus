@@ -2,7 +2,22 @@
 <script setup lang="ts">
 import offerCard from '@/components/offerCard.vue'
 import { getFullListFilteredLiked } from '@/backend'
-import IconLikeillus from '@/components/icons/IconLikeillus.vue';
+import IconLikeillus from '@/components/icons/IconLikeillus.vue'
+
+import { pb } from '@/backend'
+import { useRouter } from 'vue-router/auto'
+import { ref, onMounted } from 'vue'
+const router = useRouter()
+
+const currentuser = ref()
+
+onMounted(async () => {
+  currentuser.value = pb.authStore.isValid ? pb.authStore.model : null
+
+  if (!currentuser.value) {
+    router.replace('/connexion')
+  }
+})
 
 const cardLiked = await getFullListFilteredLiked()
 </script>

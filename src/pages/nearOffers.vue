@@ -42,12 +42,27 @@
 import { ref, onMounted } from 'vue'
 import { GoogleMap, Marker, InfoWindow } from 'vue3-google-map'
 import { Loader } from '@googlemaps/js-api-loader'
-import { pb } from '@/backend'
+import { pb, onMounted } from '@/backend'
 import type { CardResponse } from '@/pocketbase-types'
 import IconLoc from '@/components/icons/IconLoc.vue'
 
 
 import userIcon from '@/components/icons/user.svg'
+
+
+import { useRouter } from 'vue-router/auto'
+
+const router = useRouter()
+
+const currentuser = ref()
+
+onMounted(async () => {
+  currentuser.value = pb.authStore.isValid ? pb.authStore.model : null
+
+  if (!currentuser.value) {
+    router.replace('/connexion')
+  }
+})
 
 const API_KEY = 'AIzaSyCKmO2ekMm4OlsHvib9gUlBAs9sEZSCv8Q'
 const center = ref({ lat: 47.5098, lng: 6.7997 })
