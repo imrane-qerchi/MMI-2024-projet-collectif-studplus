@@ -21,7 +21,7 @@
             <label class="sr-only" for="">Surnom</label>
             <input
               v-model="user_form.username"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               type="text"
               placeholder="Surnom"
               required
@@ -31,7 +31,7 @@
             <label class="sr-only" for="">Adresse e-mail</label>
             <input
               v-model="user_form.email"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               type="email"
               placeholder="Adresse e-mail"
               required
@@ -41,7 +41,7 @@
             <label class="sr-only" for="">Mot de passe</label>
             <input
               v-model="user_form.password"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               type="password"
               placeholder="Mot de passe"
               minlength="8"
@@ -59,7 +59,7 @@
             <label class="sr-only" for="">Confirmer le mot de passe</label>
             <input
               v-model="user_form.passwordConfirm"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               type="password"
               minlength="8"
               placeholder="Confirmer le mot de passe"
@@ -76,7 +76,12 @@
           >
             S'inscrire
           </button>
-          <p class="pt-5">Retour à la page de <button class="underline font-bold" @click="router.push('/connexion')">Connexion</button></p>
+          <p class="pt-5">
+            Retour à la page de
+            <button class="underline font-bold" @click="router.push('/connexion')">
+              Connexion
+            </button>
+          </p>
         </div>
       </form>
     </div>
