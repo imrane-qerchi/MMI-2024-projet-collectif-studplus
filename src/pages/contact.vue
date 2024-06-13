@@ -1,7 +1,20 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
+import { pb } from '@/backend'
+import { useRouter } from 'vue-router/auto'
+const router = useRouter()
+
+const currentuser = ref()
+
+onMounted(async () => {
+  currentuser.value = pb.authStore.isValid ? pb.authStore.model : null
+
+  if (!currentuser.value) {
+    router.replace('/connexion')
+  }
+})
 
 const formData = ref({
   lname: '',
