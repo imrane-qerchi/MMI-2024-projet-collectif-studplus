@@ -12,11 +12,11 @@ onErrorCaptured((err, instance, info) => {
 </script>
 
 <template>
-  <HeaderPage />
+  <HeaderPage v-if="$route.path !== '/connexion' && $route.path !== '/inscription'" />
   <RouterView v-slot="{ Component }">
     <Suspense>
       <component :is="Component" :key="$route.path" />
     </Suspense>
   </RouterView>
-  <FooterPage />
+  <FooterPage v-if="$route.path !== '/connexion' && $route.path !== '/inscription'" />
 </template>
