@@ -21,7 +21,7 @@ const fields = [
 </script>
 
 <template>
-  <section class="py-24 px-8 lg:px-32 m-10">
+  <section class="py-14 lg:px-32 mx-2 my-10">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-[1vw]">
         <div class="flex flex-col gap-14">
