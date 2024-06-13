@@ -38,7 +38,7 @@ function closeMenu() {
         <li>
           <RouterLink
             class="block p-4 rounded-lg text-gray-500"
-            to="/properties/"
+            to="/nearOffers"
             @click="closeMenu"
             >Autour De Moi</RouterLink
           >
