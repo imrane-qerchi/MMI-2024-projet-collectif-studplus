@@ -1,19 +1,24 @@
 <template>
-  <div class="flex flex-col gap-10 px-5 py-16">
-    <h1 class="max-w-fit text-[34px] border-b-2 pb-3 border-[#694C9B]">Offres proches de vous</h1>
+  <div class="relative flex flex-col gap-10 px-5 py-16 overflow-x-hidden">
+    <IconLoc />
+    <h1 class="max-w-fit text-[34px] border-b-2 pb-3 border-[#694C9B]">
+      Trouve des avantages proche de toi
+    </h1>
     <form @submit.prevent="updateUserLocation">
       <div class="flex flex-col gap-3 mb-5">
         <label class="font-bold" for="adresse">Adresse</label>
-        <p class="text-gray-600 font-light text-sm"> n° | adresse | code postal | ville</p>
-        <input 
-          type="text" 
-          id="adresse" 
-          v-model="userAddress" 
-          ref="autocompleteInput" 
+        <p class="text-gray-600 font-light text-sm">n° | adresse | code postal | ville</p>
+        <input
+          type="text"
+          id="adresse"
+          v-model="userAddress"
+          ref="autocompleteInput"
           class="p-2 border border-gray-300 rounded"
           @focus="initAutocomplete"
         />
-        <button type="submit" class="px-4 py-2 mt-2 text-white bg-purple-600 rounded">Mettre à jour la position</button>
+        <button type="submit" class="px-4 py-2 mt-2 text-white bg-purple-600 rounded">
+          Mettre à jour la position
+        </button>
       </div>
     </form>
     <GoogleMap :api-key="API_KEY" style="width: 100%; height: 500px" :center="center" :zoom="12">
@@ -39,6 +44,7 @@ import { GoogleMap, Marker, InfoWindow } from 'vue3-google-map'
 import { Loader } from '@googlemaps/js-api-loader'
 import { pb } from '@/backend'
 import type { CardResponse } from '@/pocketbase-types'
+import IconLoc from '@/components/icons/IconLoc.vue'
 
 // Importer l'icône utilisateur
 import userIcon from '@/components/icons/user.svg'
@@ -48,7 +54,7 @@ const center = ref({ lat: 47.5098, lng: 6.7997 })
 const enseignes = ref([])
 const userLocation = ref({ lat: 47.5098, lng: 6.7997 })
 const infoWindowOpened = ref(false)
-const userIconUrl = userIcon;
+const userIconUrl = userIcon
 const userAddress = ref('')
 const autocompleteInput = ref(null)
 
@@ -68,7 +74,7 @@ const loadMap = async () => {
     records.map(async (infoCard: CardResponse<any>) => {
       const { ville, adresse, nom } = infoCard
       const location = await geocodeAddress(geocoder, `${adresse}, ${ville}`)
-      console.log('Enseigne location:', location); 
+      console.log('Enseigne location:', location)
       return { nom, location }
     })
   )
@@ -94,7 +100,7 @@ const getUserLocation = () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         }
-        console.log('User location:', pos);
+        console.log('User location:', pos)
         userLocation.value = pos
         center.value = pos
       },
@@ -140,9 +146,9 @@ const initAutocomplete = () => {
 }
 
 const showUserLocationInfo = () => {
-  console.log('showUserLocationInfo called');
+  console.log('showUserLocationInfo called')
   infoWindowOpened.value = true
-  console.log('infoWindowOpened:', infoWindowOpened.value);
+  console.log('infoWindowOpened:', infoWindowOpened.value)
 }
 
 onMounted(async () => {
