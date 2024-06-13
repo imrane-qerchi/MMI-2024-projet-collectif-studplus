@@ -7,7 +7,6 @@ import AlertWindow from '@/components/AlertWindow.vue'
 
 const router = useRouter()
 
-const currentuser = ref()
 const email = ref('')
 const password = ref('')
 
@@ -22,17 +21,11 @@ onMounted(async () => {
   if (pb.authStore.isValid) {
     router.replace('/')
   }
-
-  pb.authStore.onChange(() => {
-    currentuser.value = pb.authStore.model
-  }, true)
 })
 
 const doLogin = async () => {
   try {
     await pb.collection('users').authWithPassword(email.value, password.value)
-    currentuser.value = pb.authStore.model
-    router.push('/')
     window.location.reload()
   } catch (error) {
     checkError(error)

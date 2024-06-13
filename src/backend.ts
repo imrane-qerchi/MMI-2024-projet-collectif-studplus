@@ -201,5 +201,6 @@ export async function addNewEvent() {
 export async function createUser(user: any) {
   await pb.collection('users').create(user)
   await pb.collection('users').authWithPassword(user.email, user.password)
+  window.location.reload()
   return true
 }
