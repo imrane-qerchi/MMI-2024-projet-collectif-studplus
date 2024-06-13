@@ -198,3 +198,8 @@ export async function addNewEvent() {
   await pb.collection('event').create
 }
 
+export async function createUser(user: any) {
+  await pb.collection('users').create(user)
+  await pb.collection('users').authWithPassword(user.email, user.password)
+  return true
+}

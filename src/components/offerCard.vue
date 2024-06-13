@@ -101,7 +101,7 @@ function fixeFavoriPourID(fav: boolean, id: string) {
     </div>
   </router-link>
 
-  <router-link v-else :to="`/${id}`">
+  <router-link v-else :to="`/offres/${id}`">
     <div class="flex flex-col justify-between items-start w-full h-full z-10">
       <div class="flex flex-col justify-between items-start self-stretch flex-grow relative">
         <ImgPb

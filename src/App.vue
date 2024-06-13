@@ -18,5 +18,5 @@ onErrorCaptured((err, instance, info) => {
       <component :is="Component" :key="$route.path" />
     </Suspense>
   </RouterView>
-  <FooterPage/>
+  <FooterPage />
 </template>

@@ -23,13 +23,13 @@ import IconMMI from '@/components/icons/IconMMI.vue'
           <li>
             <RouterLink class="block" to="/contact">Contactez nous</RouterLink>
           </li>
-          <li>
+          <li v-if="$route.path !== '/connexion' && $route.path !== '/inscription'"  >
             <RouterLink class="block" to="/about">Partenaires</RouterLink>
           </li>
           <li>
             <RouterLink class="block" to="/about">À propos</RouterLink>
           </li>
-          <li>
+          <li v-if="$route.path !== '/connexion' && $route.path !== '/inscription'"  >
             <RouterLink class="block" to="/account">Mon compte</RouterLink>
           </li>
         </ul>
