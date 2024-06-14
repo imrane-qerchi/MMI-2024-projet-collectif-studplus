@@ -4,9 +4,6 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { pb } from '@/backend'
 import type { UsersResponse } from '@/pocketbase-types'
-import Button from '@/components/Button.vue'
-
-import ImgPb from './ImgPb.vue'
 
 const router = useRouter()
 const profile = ref<UsersResponse>({
