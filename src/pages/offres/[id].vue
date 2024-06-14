@@ -15,12 +15,12 @@ const route = useRoute('/offres/[id]')
 const infoCard: CardResponse<any> = await pb.collection('Card').getOne(route.params.id)
 const imageHero = await pb.getFileUrl(infoCard, infoCard.image)
 
-const users = await pb.collection('Users').getFullList()
 const likedCardsCount = ref(0)
 
-likedCardsCount.value = users.filter(
-  (users) => users.favoris && users.favoris.includes(infoCard.id)
-).length
+if (infoCard.fav === true) {
+  likedCardsCount.value += 1
+}
+
 
 function fixeFavoriPourID(fav: boolean, id: string) {
   console.log(fav, id)
@@ -34,12 +34,13 @@ function fixeFavoriPourID(fav: boolean, id: string) {
 
 import { GoogleMap, Marker } from "vue3-google-map";
 import { Loader } from '@googlemaps/js-api-loader';
+import { c } from 'node_modules/unplugin-vue-router/dist/options-yBvUhD_i.mjs'
 
 const API_KEY = "AIzaSyCKmO2ekMm4OlsHvib9gUlBAs9sEZSCv8Q";
 const center = ref({ lat: 47.5098, lng: 6.7997 });
 
-const ville = infoCard.ville; 
-const adresse = infoCard.adresse; 
+const ville = infoCard.ville;
+const adresse = infoCard.adresse;
 
 onMounted(async () => {
   const loader = new Loader({
@@ -59,8 +60,6 @@ onMounted(async () => {
     }
   });
 });
-
-
 </script>
 
 <template>
@@ -139,12 +138,7 @@ onMounted(async () => {
 
   <div class="flex flex-col gap-10 px-5 py-16">
     <h1 class="max-w-fit text-[34px] border-b-2 pb-3 border-[#694C9B]">Viiite, j'en profite</h1>
-    <GoogleMap
-      :api-key="API_KEY"
-      style="width: 100%; height: 500px"
-      :center="center"
-      :zoom="14"
-    >
+    <GoogleMap :api-key="API_KEY" style="width: 100%; height: 500px" :center="center" :zoom="14">
       <Marker :options="{ position: center }" />
     </GoogleMap>
   </div>
