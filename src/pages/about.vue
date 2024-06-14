@@ -48,8 +48,8 @@ import IconCertif from '@/components/icons/IconCertif.vue'
             <h2 class="text-[34px] border-b-2 pb-3 w-fit border-[#694C9B]">Partenaires</h2>
             <IconCertif class="w-[300px] h-auto top-[5vw] right-[-35vw]" />
         </div>
-        <Carousel class="py-[5vh]" /> 
-        <p class="pb-5 font-semibold">
+        
+        <p class="py-5 font-semibold">
             Nous travaillons en étroite collaboration avec différentes enseignes afin de vous obtenir d’incroyables avantages !
         </p>
         <RouterLink to="/nearOffers" class="text-gray-400 underline text-[14px]" >DÉCOUVRIR LES AVANTAGES</RouterLink>
