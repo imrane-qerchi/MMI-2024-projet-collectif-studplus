@@ -30,7 +30,7 @@ import IconMMI from '@/components/icons/IconMMI.vue'
             <RouterLink class="block" to="/about">À propos</RouterLink>
           </li>
           <li>
-            <RouterLink class="block" to="/account">Mon compte</RouterLink>
+            <RouterLink class="block" to="/profile">Mon compte</RouterLink>
           </li>
         </ul>
       </div>

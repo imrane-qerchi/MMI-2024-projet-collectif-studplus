@@ -43,10 +43,10 @@ import IconCertif from '@/components/icons/IconCertif.vue'
             <p class="text-[30px] font-semibold">Utilisateurs</p>
         </div>
     </section>
-    <section class="my-[10vh] mx-5">
-        <div class="relative flex justify-between items-center w-full overflow-x-hidden">
-            <h2 class="text-[34px] border-b-2 pb-3 border-[#694C9B]">Partenaires</h2>
-            <IconCertif />
+    <section class="relative overflow-x-hidden container pt-36">
+        <div class="">
+            <h2 class="text-[34px] border-b-2 pb-3 w-fit border-[#694C9B]">Partenaires</h2>
+            <IconCertif class="w-[300px] h-auto top-[5vw] right-[-35vw]" />
         </div>
         <Carousel class="py-[5vh]" /> 
         <p class="pb-5 font-semibold">
