@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import IconLikeillus from '@/components/icons/IconLikeillus.vue';
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { pb } from '@/backend';
-import type { UsersResponse } from '@/pocketbase-types';
-import Button from '@/components/Button.vue';
+import IconLikeillus from '@/components/icons/IconLikeillus.vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { pb } from '@/backend'
+import type { UsersResponse } from '@/pocketbase-types'
+import Button from '@/components/Button.vue'
 
-const router = useRouter();
+import ImgPb from './ImgPb.vue'
+
+const router = useRouter()
 const profile = ref<UsersResponse>({
   name: '',
   username: '',
@@ -19,83 +21,98 @@ const profile = ref<UsersResponse>({
   created: '',
   updated: '',
   collectionId: '',
-  collectionName: 'users',
-});
+  collectionName: 'users'
+})
 
-const defaultAvatarUrl = 'https://example.com/default-avatar.png'; // URL de l'avatar par défaut
-const avatarUrl = ref(defaultAvatarUrl);
-const password = ref('');
-const confirmPassword = ref('');
-const fileInput = ref<HTMLInputElement | null>(null);
+const userId = pb.authStore.model?.id
+const user: UsersResponse<any> = await pb.collection('users').getOne(userId)
+const profilPicture = await pb.getFileUrl(user, user.avatar)
+const defaultAvatarUrl = 'https://example.com/default-avatar.png'
+const avatarUrl = ref(defaultAvatarUrl)
+const password = ref('')
+const confirmPassword = ref('')
+const fileInput = ref<HTMLInputElement | null>(null)
 
 onMounted(async () => {
   if (!pb.authStore.isValid) {
-    router.push('/connexion');
+    router.push('/connexion')
   } else {
-    const userId = pb.authStore.model?.id;
-    const user = await pb.collection('users').getOne(userId);
-    profile.value = user;
-    avatarUrl.value = user.avatar ? user.avatar : defaultAvatarUrl;
+    const userId = pb.authStore.model?.id
+    const user: UsersResponse<any> = await pb.collection('users').getOne(userId)
+    profile.value = user
+    let profilPicture = await pb.getFileUrl(user, user.avatar)
+    console.log(user.avatar)
+    profilPicture = profilPicture ? profilPicture : defaultAvatarUrl
+    avatarUrl.value = profilPicture
   }
-});
+})
 
 const triggerFileInput = () => {
-  fileInput.value?.click();
-};
+  fileInput.value?.click()
+}
 
 const handleFileUpload = async (event: Event) => {
-  const file = (event.target as HTMLInputElement).files?.[0];
+  const file = (event.target as HTMLInputElement).files?.[0]
   if (file) {
-    const formData = new FormData();
-    formData.append('avatar', file);
+    const formData = new FormData()
+    formData.append('avatar', file)
 
     try {
-      const updatedUser = await pb.collection('users').update(profile.value.id, formData);
-      avatarUrl.value = URL.createObjectURL(file);
-      profile.value.avatar = updatedUser.avatar;
-      alert("Photo de profil mise à jour avec succès");
+      const updatedUser = await pb.collection('users').update(profile.value.id, formData)
+      const profilPicture = await pb.getFileUrl(updatedUser, updatedUser.avatar)
+      avatarUrl.value = profilPicture ? profilPicture : defaultAvatarUrl
+      profile.value.avatar = updatedUser.avatar
+      alert('Photo de profil mise à jour avec succès')
     } catch (error) {
-      alert("Erreur lors de la mise à jour de la photo de profil");
+      alert('Erreur lors de la mise à jour de la photo de profil')
     }
+    location.reload()
+  } else {
+    avatarUrl.value = defaultAvatarUrl
   }
-};
+}
 
 const saveProfile = async () => {
   if (password.value && password.value !== confirmPassword.value) {
-    alert("Les mots de passe ne correspondent pas");
-    return;
+    alert('Les mots de passe ne correspondent pas')
+    return
   }
 
   try {
     const updatedProfile: Partial<UsersResponse> = {
       name: profile.value.name,
       username: profile.value.username,
-      password: password.value ? password.value : undefined,
-    };
+      password: password.value ? password.value : undefined
+    }
 
-    await pb.collection('users').update(profile.value.id, updatedProfile);
-    alert("Profil mis à jour avec succès");
+    await pb.collection('users').update(profile.value.id, updatedProfile)
+    alert('Profil mis à jour avec succès')
   } catch (error) {
-    alert("Erreur lors de la mise à jour du profil");
+    alert('Erreur lors de la mise à jour du profil')
   }
-};
+}
 
 const logout = () => {
-  pb.authStore.clear();
-  router.push('/connexion');
-};
+  pb.authStore.clear()
+  router.push('/connexion')
+}
 </script>
-
 
 <template>
   <section class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div class="relative flex justify-between items-center w-full">
-        <h2 class="mt-6 text-[34px] text-center border-b-2 pb-3 border-[#694C9B]">Bonjour {{ profile.username }} !</h2>
+        <h2 class="mt-6 text-[34px] text-center border-b-2 pb-3 border-[#694C9B]">
+          Bonjour {{ profile.username }} !
+        </h2>
       </div>
       <div class="flex justify-center">
         <div class="relative">
-          <img :src="avatarUrl" class="h-40 w-40 mb-1 rounded-full object-cover border-2 border-gray-300 drop-shadow-lg cursor-pointer" @click="triggerFileInput" />
+          <img
+            :src="profilPicture"
+            class="h-40 w-40 mb-1 rounded-full object-cover border-2 border-gray-300 drop-shadow-lg cursor-pointer"
+            @click="triggerFileInput"
+          />
           <input type="file" ref="fileInput" @change="handleFileUpload" class="hidden" />
         </div>
       </div>
@@ -144,10 +161,17 @@ const logout = () => {
           </div>
         </div>
         <div class="flex justify-between">
-          <button type="submit" class="py-3 px-4 border border-transparent drop-shadow-lg text-sm font-medium rounded-xl text-white bg-[#694C9B]">
+          <button
+            type="submit"
+            class="py-3 px-4 border border-transparent drop-shadow-lg text-sm font-medium rounded-xl text-white bg-[#694C9B]"
+          >
             Enregistrer
           </button>
-          <button @click="logout" type="button" class="py-3 px-4 border border-transparent drop-shadow-lg text-sm font-medium rounded-xl text-white bg-red-600">
+          <button
+            @click="logout"
+            type="button"
+            class="py-3 px-4 border border-transparent drop-shadow-lg text-sm font-medium rounded-xl text-white bg-red-600"
+          >
             Se déconnecter
           </button>
         </div>
@@ -160,10 +184,12 @@ const logout = () => {
     </div>
     <div class="mb-28">
       <p class="mt-14 mb-10 font-semibold text-xl">
-        Tu kiffes un avantage ? <br> n’hésite pas à l’ajouter à ta liste d’avantages fav’ !
+        Tu kiffes un avantage ? <br />
+        n’hésite pas à l’ajouter à ta liste d’avantages fav’ !
       </p>
-      <RouterLink to="/favoris" class="text-purple-400 underline text-[14px] font-semibold text-lg" >Voir mes avantages favoris </RouterLink>
-      
+      <RouterLink to="/favoris" class="text-purple-400 underline text-[14px] font-semibold text-lg"
+        >Voir mes avantages favoris
+      </RouterLink>
     </div>
   </section>
 </template>
