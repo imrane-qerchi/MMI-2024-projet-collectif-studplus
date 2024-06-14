@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { pb } from '@/backend'
 import { useRouter } from 'vue-router/auto'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import offerCard from '@/components/offerCard.vue'
 import {
   getFullListFilteredCertified,
@@ -17,6 +17,7 @@ import {
 import IconCertif from '@/components/icons/IconCertif.vue'
 import FilterPage from '@/components/FilterPage.vue'
 
+
 const cardCertified = await getFullListFilteredCertified()
 const cardWithoutCertified = await getFullListFilteredWithoutCertified()
 const cardBeaute = await getFullListFilteredBeaute()
@@ -29,6 +30,24 @@ const cardMode = await getFullListFilteredMode()
 const currentFilter = ref('')
 const displayedCards = ref(cardCertified)
 const isCertifiedDisplayed = ref(true)
+
+const favoris = ref<string[]>([])
+
+async function fetchFavoris(userId: string | null) {
+  if (!userId) return;
+  try {
+    const user = await pb.collection("users").getOne(userId);
+    const favorisIds = user.favoris || [];
+    favoris.value = favorisIds;
+    console.log("Favoris fetched:", favoris.value);
+  } catch (error) {
+    console.error("Failed to fetch favoris:", error);
+  }
+}
+
+function isFavorite(id: string) {
+  return favoris.value.includes(id)
+}
 
 const handleFilterChange = (filter: any) => {
   if (filter.active) {
@@ -80,6 +99,8 @@ onMounted(async () => {
   if (!currentuser.value) {
     router.replace('/connexion')
   }
+
+  await fetchFavoris(currentuser.value?.id)
 })
 </script>
 
@@ -95,7 +116,7 @@ onMounted(async () => {
           </h1>
         </div>
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-          <offerCard v-for="card in displayedCards" v-bind="card" v-bind:key="card.id" />
+          <offerCard v-for="card in displayedCards" v-bind="card" v-bind:key="card.id" :isFavori="isFavorite(card.id)" :userid="pb.authStore.model.id" />
         </div>
       </div>
       <div class="flex flex-col gap-10">
@@ -104,7 +125,7 @@ onMounted(async () => {
         </div>
 
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-          <offerCard v-for="card in cardWithoutCertified" v-bind="card" v-bind:key="card.id" />
+          <offerCard v-for="card in cardWithoutCertified" v-bind="card" v-bind:key="card.id" :isFavori="isFavorite(card.id)" :userid="pb.authStore.model.id" />
         </div>
       </div>
     </div>
