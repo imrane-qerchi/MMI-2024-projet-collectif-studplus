@@ -42,13 +42,11 @@
 import { ref, onMounted } from 'vue'
 import { GoogleMap, Marker, InfoWindow } from 'vue3-google-map'
 import { Loader } from '@googlemaps/js-api-loader'
-import { pb, onMounted } from '@/backend'
+import { pb } from '@/backend'
 import type { CardResponse } from '@/pocketbase-types'
 import IconLoc from '@/components/icons/IconLoc.vue'
 
-
 import userIcon from '@/components/icons/user.svg'
-
 
 import { useRouter } from 'vue-router/auto'
 
