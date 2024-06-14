@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router/auto'
 import Pocketbase from 'pocketbase'
 import { pb } from '@/backend'
 import AlertWindow from '@/components/AlertWindow.vue'
+import IconLogo from '@/components/icons/IconLogo.vue'
 
 const router = useRouter()
 
@@ -70,8 +71,9 @@ function checkError(error: any) {
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
-      <div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <div class="flex flex-col items-center justify-center">
+        <IconLogo class="w-40 h-auto"/>
+        <h2 class="mt-6 w-[75%] text-center text-3xl font-extrabold text-gray-900">
           Bon retour parmi nous !
         </h2>
         <p class="text-center pt-5">Connectez vous à votre compte.</p>
