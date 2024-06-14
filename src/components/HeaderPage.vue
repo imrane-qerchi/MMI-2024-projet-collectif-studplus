@@ -50,11 +50,6 @@ function closeMenu() {
           >
         </li>
         <li>
-          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/account" @click="closeMenu"
-            >Mon Compte</RouterLink
-          >
-        </li>
-        <li>
           <RouterLink class="block p-4 rounded-lg text-gray-500" to="/favoris" @click="closeMenu"
             >Mes Favoris</RouterLink
           >
@@ -62,6 +57,11 @@ function closeMenu() {
         <li>
           <RouterLink class="block p-4 rounded-lg text-gray-500" to="/about" @click="closeMenu"
             >À Propos</RouterLink
+          >
+        </li>
+        <li>
+          <RouterLink class="block p-4 rounded-lg text-gray-500" to="/profile" @click="closeMenu"
+            >Mon Compte</RouterLink
           >
         </li>
       </ul>
