@@ -50,9 +50,9 @@ import IconCertif from '@/components/icons/IconCertif.vue'
     </div>
   </section>
   <section class="relative overflow-x-hidden container pt-36">
-    <div class="">
+    <div class="overflow-hidden w-full h-auto">
       <h2 class="text-[34px] border-b-2 pb-3 w-fit border-[#694C9B]">Partenaires</h2>
-      <IconCertif class="w-[300px] h-auto top-[5vw] right-[-35vw]" />
+      <IconCertif class="max-w-[100%] max-h-[100%] top-[5vw] right-[-35vw]" />
     </div>
 
     <p class="py-5 font-semibold">
