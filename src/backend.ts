@@ -161,11 +161,18 @@ export async function getFullListFilteredWithoutCertified() {
   }
 }
 
-export async function getFullListFilteredLiked() {
+export async function getFullListFilteredLiked(userId: string) {
   try {
-    const records = await pb.collection('card').getFullList({ filter: 'fav=true' })
-    console.table(records)
-    return records
+    // Fetch the user
+    const user = await pb.collection('users').getOne(userId)
+    // Get the list of favorite ids
+    const favorisIds = user.favoris || []
+    // Fetch all cards
+    const allCards = await pb.collection('card').getFullList()
+    // Filter cards based on whether their id is in the user's favorites
+    const likedCards = allCards.filter((card) => favorisIds.includes(card.id))
+    console.table(likedCards)
+    return likedCards
   } catch (e) {
     console.error(e)
   }
