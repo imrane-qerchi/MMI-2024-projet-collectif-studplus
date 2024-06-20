@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { pb } from '@/backend'
 import { useRouter } from 'vue-router/auto'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, nextTick } from 'vue'
 import offerCard from '@/components/offerCard.vue'
 import {
   getFullListFilteredCertified,
@@ -40,6 +40,7 @@ async function fetchFavoris(userId: string | null) {
     const favorisIds = user.favoris || [];
     favoris.value = favorisIds;
     console.log("Favoris fetched:", favoris.value);
+    await nextTick(); // Ajoutez cette ligne
   } catch (error) {
     console.error("Failed to fetch favoris:", error);
   }

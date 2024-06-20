@@ -6,7 +6,7 @@ import IconLikeillus from '@/components/icons/IconLikeillus.vue'
 
 import { pb } from '@/backend'
 import { useRouter } from 'vue-router/auto'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 const router = useRouter()
 
 const currentuser = ref()
@@ -17,9 +17,30 @@ onMounted(async () => {
   if (!currentuser.value) {
     router.replace('/connexion')
   }
+
+  await fetchFavoris(currentuser.value?.id)
 })
 
-const cardLiked = await getFullListFilteredLiked()
+const favoris = ref<string[]>([])
+
+async function fetchFavoris(userId: string | null) {
+  if (!userId) return
+  try {
+    const user = await pb.collection('users').getOne(userId)
+    const favorisIds = user.favoris || []
+    favoris.value = favorisIds
+    console.log('Favoris fetched:', favoris.value)
+    await nextTick() // Ajoutez cette ligne
+  } catch (error) {
+    console.error('Failed to fetch favoris:', error)
+  }
+}
+
+function isFavorite(id: string) {
+  return favoris.value.includes(id)
+}
+
+const cardLiked = await getFullListFilteredLiked(pb.authStore.model.id)
 </script>
 
 <template>
@@ -31,7 +52,13 @@ const cardLiked = await getFullListFilteredLiked()
           <h1 class="text-[34px] border-b-2 pb-3 border-[#694C9B]">Mes offres fav'</h1>
         </div>
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-          <offerCard v-for="card in cardLiked" v-bind="card" v-bind:key="card.id" />
+          <offerCard
+            v-for="card in cardLiked"
+            v-bind="card"
+            v-bind:key="card.id"
+            :isFavori="isFavorite(card.id)"
+            :userid="pb.authStore.model.id"
+          />
         </div>
       </div>
     </div>

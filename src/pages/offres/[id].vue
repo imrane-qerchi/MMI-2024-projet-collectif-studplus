@@ -15,51 +15,93 @@ const route = useRoute('/offres/[id]')
 const infoCard: CardResponse<any> = await pb.collection('Card').getOne(route.params.id)
 const imageHero = await pb.getFileUrl(infoCard, infoCard.image)
 
+console.log('infoCard.id:', infoCard.id);
+
 const likedCardsCount = ref(0)
 
-if (infoCard.fav === true) {
-  likedCardsCount.value += 1
+
+const favoris = ref<string[]>([])
+
+console.log('favoris:', favoris)
+
+async function fetchFavoris(userId: string | null) {
+  if (!userId) return
+  try {
+    const user = await pb.collection('users').getOne(userId)
+    const favorisIds = user.favoris || []
+    favoris.value = favorisIds
+    console.log('Favoris fetched:', favoris.value)
+  } catch (error) {
+    console.error('Failed to fetch favoris:', error)
+  }
+}
+
+function isFavorite(id: string) {
+  return favoris.value.includes(id)
 }
 
 
-function fixeFavoriPourID(fav: boolean, id: string) {
-  console.log(fav, id)
-  pb.collection('Card').update(id, { fav: fav })
-  location.reload()
+const isFavori = ref(false)
+
+console.log('isFavori:', isFavori)
+
+const favori_fill = ref(isFavori)
+
+console.log('favori_fill:', favori_fill)
+
+async function addOffer(id: string) {
+  try {
+    const user = await pb.collection('users').getOne(pb.authStore.model.id)
+    const favoris = user.favoris || []
+    if (favoris.includes(id)) {
+      await pb
+        .collection('users')
+        .update(pb.authStore.model.id, { favoris: favoris.filter((f) => f !== id) })
+      favori_fill.value = false
+    } else {
+      await pb.collection('users').update(pb.authStore.model.id, { favoris: [...favoris, id] })
+      favori_fill.value = true
+    }
+  } catch (error) {
+    console.error('Failed to add offer to favoris:', error)
+  }
 }
 
+import { GoogleMap, Marker } from 'vue3-google-map'
+import { Loader } from '@googlemaps/js-api-loader'
 
+const API_KEY = 'AIzaSyCKmO2ekMm4OlsHvib9gUlBAs9sEZSCv8Q'
+const center = ref({ lat: 47.5098, lng: 6.7997 })
 
+const ville = infoCard.ville
+const adresse = infoCard.adresse
 
+const currentuser = ref()
 
-import { GoogleMap, Marker } from "vue3-google-map";
-import { Loader } from '@googlemaps/js-api-loader';
-import { c } from 'node_modules/unplugin-vue-router/dist/options-yBvUhD_i.mjs'
-
-const API_KEY = "AIzaSyCKmO2ekMm4OlsHvib9gUlBAs9sEZSCv8Q";
-const center = ref({ lat: 47.5098, lng: 6.7997 });
-
-const ville = infoCard.ville;
-const adresse = infoCard.adresse;
 
 onMounted(async () => {
   const loader = new Loader({
     apiKey: API_KEY,
-    version: 'weekly',
-  });
+    version: 'weekly'
+  })
 
-  await loader.load();
+  currentuser.value = pb.authStore.isValid ? pb.authStore.model : null
+  
+  await fetchFavoris(currentuser.value?.id)
+  isFavori.value = isFavorite(infoCard.id)
 
-  const geocoder = new google.maps.Geocoder();
+  await loader.load()
+
+  const geocoder = new google.maps.Geocoder()
 
   geocoder.geocode({ address: `${adresse}, ${ville}` }, (results, status) => {
     if (status === 'OK') {
-      center.value = results[0].geometry.location;
+      center.value = results[0].geometry.location
     } else {
-      console.error('Geocode was not successful for the following reason: ' + status);
+      console.error('Geocode was not successful for the following reason: ' + status)
     }
-  });
-});
+  })
+})
 </script>
 
 <template>
@@ -71,7 +113,7 @@ onMounted(async () => {
       <IconReturn />
 
       <svg
-        @click="fixeFavoriPourID(!infoCard.fav, infoCard.id)"
+        @click="addOffer(infoCard.id)"
         width="46"
         height="46"
         viewBox="0 0 46 46"
@@ -92,7 +134,7 @@ onMounted(async () => {
         ></circle>
         <path
           d="M30.6308 17.8587C31.4956 18.7269 31.9811 19.9025 31.9811 21.128C31.9811 22.3534 31.4956 23.529 30.6308 24.3973L23.4883 31.5963L16.3459 24.3973C15.7036 23.7506 15.2663 22.9289 15.0887 22.0349C14.9112 21.1409 15.0013 20.2144 15.3478 19.3714C15.6942 18.5284 16.2817 17.8063 17.0366 17.2956C17.7914 16.7848 18.6802 16.5081 19.5916 16.5C20.8103 16.5074 21.9768 16.9957 22.8373 17.8587C23.0883 18.107 23.307 18.386 23.4883 18.689C23.6696 18.386 23.8884 18.107 24.1393 17.8587C24.5633 17.4285 25.0686 17.0869 25.6258 16.8537C26.183 16.6205 26.781 16.5004 27.385 16.5004C27.9891 16.5004 28.5871 16.6205 29.1443 16.8537C29.7015 17.0869 30.2068 17.4285 30.6308 17.8587Z"
-          :fill="infoCard.fav ? '#694C9B' : 'transparent'"
+          :fill="isFavori || favori_fill ? '#694C9B' : 'transparent'"
           stroke="#694C9B"
           stroke-width="1.41509"
           stroke-linecap="round"
